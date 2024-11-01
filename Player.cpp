@@ -1,75 +1,40 @@
 #include "Player.h"
+#include <iostream>
+#include "Global.h"
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float junpHeight) : animation(texture, imageCount, switchTime)
+Player::Player() : speed(300), verticalVelocity(0), gravity(1000), isFacingLeft(false)
 {
-	this->speed = speed;
-	this->jumpHeight = junpHeight;
-	row = 0;
-	faceRight = true;
-
-	body.setSize(sf::Vector2f(100.0f, 100.0f));
-	body.setPosition(sf::Vector2f(150.0f, 200.0f));
-	body.setOrigin(body.getSize() / 2.0f);
-	body.setTexture(texture);
-}
-
-Player::~Player()
-{
+	rect = sf::FloatRect(50, 50, 100, 100);
+	texture.loadFromFile("textures/player.png");
+	sprite = sf::Sprite(texture);
 }
 
 void Player::Update(float deltaTime)
 {
-	velocity.x = 0.0f; // szybki stop
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		rect.left -= speed * deltaTime;
+		isFacingLeft = true;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		rect.left += speed * deltaTime;
+		isFacingLeft = false;
+	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		velocity.x -= speed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		velocity.x += speed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && canJump) {
-		canJump = false;
-		velocity.y = -sqrt(2.0f * 981.0f * jumpHeight);
-	}
-	velocity.y += 981.0f * deltaTime;
 
-	if (velocity.x == 0.0f) {
-		row = 0;
-	}
-	else {
-		row = 1;
-		if (velocity.x > 0.0f) {
-			faceRight = true;
-		}
-		else {
-			faceRight = false;
-		}
-	}
-	animation.Update(row, deltaTime, faceRight);
-	body.setTextureRect(animation.uvRect);
-	body.move(velocity * deltaTime);
+	rect.top += verticalVelocity * deltaTime;
+	verticalVelocity += gravity * deltaTime;
+
+	if ((rect.top + rect.height) > HEIGHT)
+		rect.top = HEIGHT - rect.height;
+
+	sprite.setPosition(rect.left, rect.top);
+	sprite.setScale(rect.width / texture.getSize().x, rect.height / texture.getSize().y);
+	sprite.setTextureRect(sf::IntRect(texture.getSize().x * (isFacingLeft ? 1 : 0), 0, texture.getSize().x * (isFacingLeft ? -1 : 1), texture.getSize().y));
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
-	window.draw(body);
-}
-
-void Player::OnCollision(sf::Vector2f direction)
-{
-	if (direction.x < 0.0f)
-	{
-		//Collision on the left
-		velocity.x = 0.0f;
-	}
-	else if (direction.x > 0.0f) {
-		//Collision on the right
-		velocity.x = 0.0f;
-	}
-	if (direction.y < 0.0f) {
-		//Collision on the bottom
-		velocity.y = 0.0f;
-		canJump = true;
-	} else if (direction.y > 0.0f) {
-		//Collision on the top
-		velocity.y = 0.0f;
-	}
+	window.draw(sprite);
 }
