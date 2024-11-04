@@ -1,0 +1,3 @@
+- Rozdzielic funkcjonalnosci na klasy
+- dodac globalne zmienne
+- poziomy (Procesy wytwarzania metali  i stopow, podstawy programowania, podstawy informatyki fizyka, algebra, analiza, chemia)
