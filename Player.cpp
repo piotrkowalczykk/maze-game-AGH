@@ -4,7 +4,9 @@ Player::Player(float movementSpeed) : movementSpeed(movementSpeed) {
     texture.loadFromFile("textures/player1.png");
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-    sprite.setPosition(64, 400);
+    sprite.setPosition(138, 136);
+    float scale = 50.0f / 64.0f;
+    sprite.setScale(scale, scale);
 }
 
 void Player::handleInput(float dt) {

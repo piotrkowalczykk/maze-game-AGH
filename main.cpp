@@ -1,68 +1,58 @@
 #include <SFML/Graphics.hpp>
 #include "Map.h"
 #include "Player.h"
+#include "Global.h"
 
 int main() {
-    const unsigned WINDOW_WIDTH = 800;
-    const unsigned WINDOW_HEIGHT = 608;
-    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Egineer path");
-    window.setFramerateLimit(120);
 
-    const float gridSize = 64.0f;
-    const float movementSpeed = 200.0f;
+    // Game
+
     sf::Clock dt_clock;
-    float dt;
+    float deltaTime;
 
-    Player player(movementSpeed);
-    Map map(gridSize);
+    // Window
 
-    std::vector<std::vector<int>> mapData = {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-    };
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
+    window.setFramerateLimit(FRAMERATE_LIMIT);
 
+    // Player
+
+    Player player(PLAYER_MOVEMENT_SPEED);
     sf::View view = window.getDefaultView();
 
+    // Map
+
+    std::vector<std::vector<int>> currentMap;
+    Map map(GRID_SIZE);
+    currentMap = MAP2;
+
+
     while (window.isOpen()) {
-        dt = dt_clock.restart().asSeconds();
+
+        deltaTime = dt_clock.restart().asSeconds();
+
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-        player.handleInput(dt);
-        for (size_t y = 0; y < mapData.size(); ++y) {
-            for (size_t x = 0; x < mapData[y].size(); ++x) {
-                if (mapData[y][x] == 1) {
-                    sf::FloatRect wallBounds(x * gridSize, y * gridSize, gridSize, gridSize);
+        player.handleInput(deltaTime);
+        for (size_t y = 0; y < currentMap.size(); ++y) {
+            for (size_t x = 0; x < currentMap[y].size(); ++x) {
+                if (currentMap[y][x] == 1) {
+                    sf::FloatRect wallBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
                     player.resolveCollision(wallBounds);
                 }
             }
         }
-        player.move();
 
+        player.move();
         view.setCenter(player.getPosition());
         window.setView(view);
+
         window.clear(sf::Color::Black);
-        map.draw(window, mapData);
+        map.draw(window, currentMap);
         player.draw(window);
         window.display();
     }
