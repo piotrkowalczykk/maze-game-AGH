@@ -1,12 +1,2 @@
-﻿  Menu.cpp
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:         with
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:         [
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:             T=float
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:         ]
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:         with
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:         [
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:             T=float
-D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:         ]
+﻿  main.cpp
   Gra.vcxproj -> D:\AGH\Podstawy_Informatyki\CWA\Gra\x64\Debug\Gra.exe

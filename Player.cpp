@@ -3,8 +3,8 @@
 Player::Player(float movementSpeed) : movementSpeed(movementSpeed) {
     texture.loadFromFile("textures/player1.png");
     sprite.setTexture(texture);
-    sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-    sprite.setPosition(138, 136);
+    sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
+    sprite.setPosition(140, 136);
     float scale = 50.0f / 64.0f;
     sprite.setScale(scale, scale);
 }
@@ -12,7 +12,7 @@ Player::Player(float movementSpeed) : movementSpeed(movementSpeed) {
 void Player::handleInput(float dt) {
     velocity = { 0.0f, 0.0f };
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        updateTextureRect(192);
+        updateTextureRect(150);
         velocity.y = -movementSpeed * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
@@ -20,11 +20,11 @@ void Player::handleInput(float dt) {
         velocity.y = movementSpeed * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        updateTextureRect(64);
+        updateTextureRect(50);
         velocity.x = -movementSpeed * dt;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        updateTextureRect(128);
+        updateTextureRect(100);
         velocity.x = movementSpeed * dt;
     }
 }
@@ -81,6 +81,6 @@ void Player::resolveCollision(const sf::FloatRect& wallBounds) {
 
 void Player::updateTextureRect(int offsetY) {
     int frame = static_cast<int>((sprite.getPosition().x + sprite.getPosition().y) / 25) % 4;
-    int xTexture = frame * 64;
-    sprite.setTextureRect(sf::IntRect(xTexture, offsetY, 64, 64));
+    int xTexture = frame * 50;
+    sprite.setTextureRect(sf::IntRect(xTexture, offsetY, 50, 50));
 }

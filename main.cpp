@@ -2,19 +2,25 @@
 #include "Map.h"
 #include "Player.h"
 #include "Global.h"
+#include "GUI.h"
 #include "Menu.h"
 #include <iostream>
 
+
 int main() {
+
     // Game
+
     sf::Clock dt_clock;
     float deltaTime;
 
     // Window
+
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), TITLE);
     window.setFramerateLimit(FRAMERATE_LIMIT);
 
-    // Main Menu
+    // Menu
+
     Menu menu;
     bool startGame = false;
 
@@ -23,9 +29,27 @@ int main() {
     sf::View view = window.getDefaultView();
 
     // Map
+
     std::vector<std::vector<int>> currentMap;
+    std::vector<std::vector<int>> currentMapItems;
     Map map(GRID_SIZE);
-    currentMap = MAP2;
+    int currentLevel = 1;
+    currentMap = MAP1;
+    currentMapItems = MAP1_ITEMS;
+
+    // UI
+    sf::Font font;
+    if (!font.loadFromFile("fonts/font.ttf")) {
+        std::cerr << "Nie uda³o siê za³adowaæ czcionki!" << std::endl;
+        return -1;
+    }
+    sf::Text coinText;
+    GUI gui(font);
+    int coins = 0;
+    gui.update(coins, currentLevel);
+    gui.setPosition(view);
+    
+
 
     while (window.isOpen()) {
         deltaTime = dt_clock.restart().asSeconds();
@@ -42,6 +66,9 @@ int main() {
         }
 
         if (startGame) {
+
+            // Collision
+
             player.handleInput(deltaTime);
             for (size_t y = 0; y < currentMap.size(); ++y) {
                 for (size_t x = 0; x < currentMap[y].size(); ++x) {
@@ -52,19 +79,34 @@ int main() {
                 }
             }
 
-            std::cout << player.getPosition().x << " " << player.getPosition().y << std::endl;
+            // Change lvl
+
             if (player.getPosition().x > 1300 && player.getPosition().y > 950) {
-                currentMap = MAP1;
+                
+                switch (currentLevel) {
+                case (1):
+                    currentMap = MAP2;
+                    currentMapItems = MAP2_ITEMS;
+                    currentLevel++;
+                    break;
+                case (2):
+                    currentMap = MAP3;
+                    currentMapItems = MAP3_ITEMS;
+                    break;
+                }
                 player.setPosition(138, 136);
             }
 
             player.move();
             view.setCenter(player.getPosition());
             window.setView(view);
+            gui.setPosition(view);
 
             window.clear(sf::Color::Black);
-            map.draw(window, currentMap);
+            map.draw(window, currentMap, currentMapItems);
             player.draw(window);
+            gui.update(coins, currentLevel);
+            gui.draw(window);
             window.display();
         }
         else {
