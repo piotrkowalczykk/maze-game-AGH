@@ -5,6 +5,7 @@
 #include "GUI.h"
 #include "Menu.h"
 #include <iostream>
+#include <string>
 
 
 int main() {
@@ -25,7 +26,7 @@ int main() {
     bool startGame = false;
 
     // Player
-    Player player(PLAYER_MOVEMENT_SPEED);
+    Player player;
     sf::View view = window.getDefaultView();
 
     // Map
@@ -34,6 +35,7 @@ int main() {
     std::vector<std::vector<int>> currentMapItems;
     Map map(GRID_SIZE);
     int currentLevel = 1;
+    std::string currentLevelName = "Analiza Matematyczna";
     currentMap = MAP1;
     currentMapItems = MAP1_ITEMS;
 
@@ -46,7 +48,7 @@ int main() {
     sf::Text coinText;
     GUI gui(font);
     int coins = 0;
-    gui.update(coins, currentLevel);
+    gui.update(coins, currentLevelName);
     gui.setPosition(view);
     
 
@@ -84,6 +86,23 @@ int main() {
                             coins++;
                         }
                     }
+                    if (currentMapItems[y][x] == 4) {
+                        sf::FloatRect enemyBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                        if (player.checkItemCollision(enemyBounds)) {
+                            coins = 0;
+                            player.setMovementBoost(1.0f);
+                            player.setPosition(140, 136);
+                            currentMapItems = MAP1_ITEMS;
+                        }
+                    }
+                    if (currentMapItems[y][x] == 5) {
+                        sf::FloatRect boostBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                        if (player.checkItemCollision(boostBounds)) {
+                            std::cout << "boost";
+                            currentMapItems[y][x] = 0;
+                            player.setMovementBoost(2.0f);
+                        }
+                    }
                 }
             }
 
@@ -96,6 +115,8 @@ int main() {
                     currentMap = MAP2;
                     currentMapItems = MAP2_ITEMS;
                     currentLevel++;
+                    currentLevelName = "Algebra";
+                    player.setMovementBoost(1.0f);
                     break;
                 case (2):
                     currentMap = MAP3;
@@ -117,7 +138,7 @@ int main() {
             window.clear(sf::Color::Black);
             map.draw(window, currentMap, currentMapItems);
             player.draw(window);
-            gui.update(coins, currentLevel);
+            gui.update(coins, currentLevelName);
             gui.draw(window);
             window.display();
         }

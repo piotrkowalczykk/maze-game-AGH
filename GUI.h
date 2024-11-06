@@ -8,7 +8,7 @@ class GUI {
 public:
     GUI(sf::Font& font);
 
-    void update(int coins, int level);
+    void update(int coins, std::string level);
     void draw(sf::RenderWindow& window);
     void setPosition(const sf::View& view);
 

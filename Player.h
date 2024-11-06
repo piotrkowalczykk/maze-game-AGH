@@ -5,7 +5,7 @@
 
 class Player {
 public:
-    Player(float movementSpeed);
+    Player();
     void handleInput(float dt);
     void move();
     sf::FloatRect getBounds() const;
@@ -14,12 +14,14 @@ public:
     sf::Vector2f getPosition() const;
     void resolveCollision(const sf::FloatRect& wallBounds);
     bool checkItemCollision(const sf::FloatRect& coinBounds);
+    void setMovementBoost(float speedBoost);
 
 private:
     sf::Sprite sprite;
     sf::Texture texture;
     sf::Vector2f velocity;
     float movementSpeed;
+    float movementBoost;
     void updateTextureRect(int offsetY);
 };
 

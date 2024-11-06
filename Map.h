@@ -14,8 +14,12 @@ private:
     sf::Texture pathTexture;
     sf::Texture wallTexture;
     sf::Texture coinTexture;
+    sf::Texture enemyTexture;
+    sf::Texture boostTexture;
     sf::Sprite wallSprite;
     sf::Sprite coinSprite;
+    sf::Sprite enemySprite;
+    sf::Sprite boostSprite;
 };
 
 #endif
