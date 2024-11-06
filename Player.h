@@ -13,6 +13,7 @@ public:
     void draw(sf::RenderWindow& window);
     sf::Vector2f getPosition() const;
     void resolveCollision(const sf::FloatRect& wallBounds);
+    bool checkItemCollision(const sf::FloatRect& coinBounds);
 
 private:
     sf::Sprite sprite;

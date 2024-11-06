@@ -76,6 +76,14 @@ int main() {
                         sf::FloatRect wallBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
                         player.resolveCollision(wallBounds);
                     }
+                    if (currentMapItems[y][x] == 3) {
+                        sf::FloatRect coinBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                        if (player.checkItemCollision(coinBounds)) {
+                            std::cout << "coin";
+                            currentMapItems[y][x] = 0;
+                            coins++;
+                        }
+                    }
                 }
             }
 
@@ -96,6 +104,10 @@ int main() {
                 }
                 player.setPosition(138, 136);
             }
+
+            // item picked
+
+
 
             player.move();
             view.setCenter(player.getPosition());

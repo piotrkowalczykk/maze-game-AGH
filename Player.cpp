@@ -79,6 +79,13 @@ void Player::resolveCollision(const sf::FloatRect& wallBounds) {
     }
 }
 
+bool Player::checkItemCollision(const sf::FloatRect& coinBounds) {
+    sf::FloatRect playerBounds = getBounds();
+    if (playerBounds.intersects(coinBounds))
+        return true;
+    return false;
+}
+
 void Player::updateTextureRect(int offsetY) {
     int frame = static_cast<int>((sprite.getPosition().x + sprite.getPosition().y) / 25) % 4;
     int xTexture = frame * 50;
