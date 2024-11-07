@@ -33,12 +33,15 @@ int main() {
 
     std::vector<std::vector<int>> currentMap;
     std::vector<std::vector<int>> currentMapItems;
+    std::vector<std::vector<int>> currentMapReseter;
+    std::vector<std::vector<int>> currentMapItemsReseter;
     Map map(GRID_SIZE);
     int currentLevel = 1;
     std::string currentLevelName = "Analiza Matematyczna";
     currentMap = MAP1;
+    currentMapReseter = MAP1;
     currentMapItems = MAP1_ITEMS;
-
+    currentMapItemsReseter = MAP1_ITEMS;
     // UI
     sf::Font font;
     if (!font.loadFromFile("fonts/font.ttf")) {
@@ -74,7 +77,7 @@ int main() {
             player.handleInput(deltaTime);
             for (size_t y = 0; y < currentMap.size(); ++y) {
                 for (size_t x = 0; x < currentMap[y].size(); ++x) {
-                    if (currentMap[y][x] == 1) {
+                    if (currentMap[y][x] == 1 || currentMap[y][x] == 2) {
                         sf::FloatRect wallBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
                         player.resolveCollision(wallBounds);
                     }
@@ -92,7 +95,8 @@ int main() {
                             coins = 0;
                             player.setMovementBoost(1.0f);
                             player.setPosition(140, 136);
-                            currentMapItems = MAP1_ITEMS;
+                            currentMapItems = currentMapItemsReseter;
+                            currentMap = currentMapReseter;
                         }
                     }
                     if (currentMapItems[y][x] == 5) {
@@ -103,32 +107,42 @@ int main() {
                             player.setMovementBoost(2.0f);
                         }
                     }
+                    if (currentMapItems[y][x] == 6) {
+                        sf::FloatRect boostBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                        if (player.checkItemCollision(boostBounds)) {
+                            currentMapItems[y][x] = 7;
+                            currentMap[map.getDoorPosition().y][map.getDoorPosition().x] = 0;
+                            std::cout << map.getDoorPosition().x << map.getDoorPosition().y;
+                        }
+                    }
                 }
             }
 
             // Change lvl
 
             if (player.getPosition().x > 1300 && player.getPosition().y > 950) {
-                
+                ++currentLevel;
+
                 switch (currentLevel) {
-                case (1):
+                case (2):
                     currentMap = MAP2;
                     currentMapItems = MAP2_ITEMS;
-                    currentLevel++;
+                    currentMapItemsReseter = MAP2_ITEMS;
+                    currentMapReseter = MAP2;
                     currentLevelName = "Algebra";
                     player.setMovementBoost(1.0f);
                     break;
-                case (2):
+                case (3):
                     currentMap = MAP3;
                     currentMapItems = MAP3_ITEMS;
+                    currentLevelName = "Procesy wytwarzania metali...";
+                    player.setMovementBoost(1.0f);
                     break;
                 }
                 player.setPosition(138, 136);
             }
 
             // item picked
-
-
 
             player.move();
             view.setCenter(player.getPosition());
