@@ -1,15 +1,18 @@
 #include "Map.h"
 #include <iostream>
+#include "Global.h"
 
 Map::Map(float gridSize) : gridSize(gridSize) {
-    pathTexture.loadFromFile("textures/path1.png");
-    wallTexture.loadFromFile("textures/library.png");
-    coinTexture.loadFromFile("textures/plus.png");
-    enemyTexture.loadFromFile("textures/enemy1.png");
-    boostTexture.loadFromFile("textures/monster.png");
-    button1Texture.loadFromFile("textures/button1.png");
-    button2Texture.loadFromFile("textures/button2.png");
-    doorTexture.loadFromFile("textures/door.png");
+
+    pathTexture.loadFromFile(PATH_1);
+    wallTexture.loadFromFile(WALL_1);
+    enemyTexture.loadFromFile(ENEMY_1);
+    pointTexture.loadFromFile(POINT);
+    boostTexture.loadFromFile(BOOST);
+    buttonTexture.loadFromFile(BUTTON);
+    buttonPressedTexture.loadFromFile(BUTTON_PRESSED);
+    doorTexture.loadFromFile(DOOR);
+
 }
 
 void Map::draw(sf::RenderWindow& window, const std::vector<std::vector<int>>& map, const std::vector<std::vector<int>>& itemMap) {
@@ -31,14 +34,16 @@ void Map::draw(sf::RenderWindow& window, const std::vector<std::vector<int>>& ma
             window.draw(wallSprite);
 
             if (itemMap[y][x] == 0) {
-                coinSprite.setTexture(pathTexture);
+                pointSprite.setTexture(pathTexture);
                 boostSprite.setTexture(pathTexture);
+                buttonSprite.setTexture(pathTexture);
+                buttonSprite.setPosition(x * gridSize, y * gridSize);
                 boostSprite.setPosition(x * gridSize, y * gridSize);
-                coinSprite.setPosition(x * gridSize, y * gridSize);
+                pointSprite.setPosition(x * gridSize, y * gridSize);
             }
             if (itemMap[y][x] == 3) {
-                coinSprite.setTexture(coinTexture);
-                coinSprite.setPosition(x * gridSize, y * gridSize);
+                pointSprite.setTexture(pointTexture);
+                pointSprite.setPosition(x * gridSize, y * gridSize);
             }
             if (itemMap[y][x] == 4) {
                 enemySprite.setTexture(enemyTexture);
@@ -49,15 +54,15 @@ void Map::draw(sf::RenderWindow& window, const std::vector<std::vector<int>>& ma
                 boostSprite.setPosition(x * gridSize, y * gridSize);
             }
             if (itemMap[y][x] == 6) {
-                buttonSprite.setTexture(button2Texture);
+                buttonSprite.setTexture(buttonTexture);
                 buttonSprite.setPosition(x * gridSize, y * gridSize);
             }
             if (itemMap[y][x] == 7) {
-                buttonSprite.setTexture(button1Texture);
+                buttonSprite.setTexture(buttonPressedTexture);
                 buttonSprite.setPosition(x * gridSize, y * gridSize);
             }
 
-            window.draw(coinSprite);
+            window.draw(pointSprite);
             window.draw(enemySprite);
             window.draw(boostSprite);
             window.draw(buttonSprite);
@@ -67,4 +72,10 @@ void Map::draw(sf::RenderWindow& window, const std::vector<std::vector<int>>& ma
 
 sf::Vector2u Map::getDoorPosition() {
     return doorPosition;
+}
+
+void Map::setTextures(const std::string& pathTexture, const std::string& wallTexture, const std::string& enemyTexture){
+    this->pathTexture.loadFromFile(pathTexture);
+    this->wallTexture.loadFromFile(wallTexture);
+    this->enemyTexture.loadFromFile(enemyTexture);
 }

@@ -13,7 +13,7 @@ public:
     void draw(sf::RenderWindow& window);
     sf::Vector2f getPosition() const;
     void resolveCollision(const sf::FloatRect& wallBounds);
-    bool checkItemCollision(const sf::FloatRect& coinBounds);
+    bool checkItemCollision(const sf::FloatRect& itemBounds);
     void setMovementBoost(float speedBoost);
 
 private:

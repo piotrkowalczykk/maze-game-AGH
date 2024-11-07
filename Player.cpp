@@ -85,9 +85,9 @@ void Player::resolveCollision(const sf::FloatRect& wallBounds) {
     }
 }
 
-bool Player::checkItemCollision(const sf::FloatRect& coinBounds) {
+bool Player::checkItemCollision(const sf::FloatRect& itemBounds) {
     sf::FloatRect playerBounds = getBounds();
-    if (playerBounds.intersects(coinBounds))
+    if (playerBounds.intersects(itemBounds))
         return true;
     return false;
 }

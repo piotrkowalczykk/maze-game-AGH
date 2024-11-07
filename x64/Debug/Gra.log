@@ -1,2 +1,14 @@
-﻿  main.cpp
+﻿  Map.cpp
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267: "argument": konwersja z "size_t" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:             T=unsigned int
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:         ]
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267: "argument": konwersja z "size_t" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:             T=unsigned int
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:         ]
+  main.cpp
+  Generowanie kodu...
   Gra.vcxproj -> D:\AGH\Podstawy_Informatyki\CWA\Gra\x64\Debug\Gra.exe
