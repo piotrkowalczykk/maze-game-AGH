@@ -164,7 +164,32 @@ int main() {
                     currentLevelName = "Procesy wytwarzania metali...";
                     player.setMovementBoost(1.0f);
                     break;
+                case (4):
+                    changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_4, MAP_4_ITEMS);
+                    map.setTextures(PATH_4, WALL_4, ENEMY_4);
+                    currentLevelName = "Chemia";
+                    player.setMovementBoost(1.0f);
+                    break;
+                case (5):
+                    changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_5, MAP_5_ITEMS);
+                    map.setTextures(PATH_5, WALL_5, ENEMY_5);
+                    currentLevelName = "Fizyka";
+                    player.setMovementBoost(1.0f);
+                    break;
+                case (6):
+                    changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_6, MAP_6_ITEMS);
+                    map.setTextures(PATH_6, WALL_6, ENEMY_6);
+                    currentLevelName = "Podstawy Programowania";
+                    player.setMovementBoost(1.0f);
+                    break;
+                case (7):
+                    changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_7, MAP_7_ITEMS);
+                    map.setTextures(PATH_7, WALL_7, ENEMY_7);
+                    currentLevelName = "Podstawy Informatyki";
+                    player.setMovementBoost(1.0f);
+                    break;
                 }
+
                 player.setPosition(138, 136);
             }
 
