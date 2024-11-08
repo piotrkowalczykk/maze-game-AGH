@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Global.h"
+#include "GameOver.h"
 #include "GUI.h"
 #include "Menu.h"
 #include <iostream>
@@ -26,6 +27,8 @@ int main() {
 
     sf::Clock dt_clock;
     float deltaTime;
+    bool startGame = false;
+    bool endGame = false;
 
     // Window
 
@@ -35,7 +38,6 @@ int main() {
     // Menu
 
     Menu menu;
-    bool startGame = false;
 
     // Player
 
@@ -68,6 +70,8 @@ int main() {
 
     int points = 0;
 
+    GameOver gameOver;
+
     sf::Text pointsText;
     GUI gui(font);
     gui.update(points, currentLevelName);
@@ -76,20 +80,31 @@ int main() {
 
 
     while (window.isOpen()) {
-        deltaTime = dt_clock.restart().asSeconds();
 
+        deltaTime = dt_clock.restart().asSeconds();
         sf::Event event;
-        while (window.pollEvent(event)) {
+
+        while (window.pollEvent(event)) 
+        {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
 
-            if (!startGame) {
+            if (!startGame && !endGame) {
                 menu.handleInput(event, startGame);
+            }
+
+            if (endGame) {
+                gameOver.setPoints(points);
+                gameOver.handleInput(event, endGame, startGame);
+                if (!startGame) {
+                    points = 0;
+                }
             }
         }
 
-        if (startGame) {
+
+        if (startGame && !endGame) {
 
             player.handleInput(deltaTime);
             for (size_t y = 0; y < currentMap.size(); ++y) {
@@ -188,6 +203,14 @@ int main() {
                     currentLevelName = "Podstawy Informatyki";
                     player.setMovementBoost(1.0f);
                     break;
+                case(8):
+                    endGame = true;
+                    changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_1, MAP_1_ITEMS);
+                    map.setTextures(PATH_1, WALL_1, ENEMY_1);
+                    currentLevelName = "Analiza Matematyczna";
+                    currentLevel = 1;
+                    player.setMovementBoost(1.0f);
+                    break;
                 }
 
                 player.setPosition(138, 136);
@@ -203,8 +226,16 @@ int main() {
             player.draw(window);
             gui.update(points, currentLevelName);
             gui.draw(window);
+
+
             window.display();
 
+        }
+        else if (endGame){
+            window.setView(window.getDefaultView());
+            window.clear(sf::Color::Black);
+            gameOver.draw(window);
+            window.display();
         }
         else {
 
