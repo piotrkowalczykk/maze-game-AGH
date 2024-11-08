@@ -22,7 +22,7 @@ GameOver::GameOver() {
 
     // Ustawienia tekstu z wynikiem
     scoreText.setFont(font);
-    scoreText.setString("Twoje punkty: " + std::to_string(points));
+    scoreText.setString("Twoje plusy: " + std::to_string(points));
     scoreText.setCharacterSize(40);
     scoreText.setFillColor(sf::Color::Yellow);
     scoreText.setPosition(WINDOW_WIDTH / 2.0f - scoreText.getGlobalBounds().width / 2.0f, 250);

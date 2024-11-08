@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include "Map.h"
 #include "Player.h"
 #include "Global.h"
@@ -43,6 +44,38 @@ int main() {
 
     Player player;
     sf::View view = window.getDefaultView();
+    
+    // Sound
+
+    sf::SoundBuffer coinBuffer;
+    coinBuffer.loadFromFile("sounds/coin.wav");
+
+    sf::Sound coinSound;
+    coinSound.setBuffer(coinBuffer);
+
+    sf::SoundBuffer enemyBuffer;
+    enemyBuffer.loadFromFile("sounds/enemy.wav");
+
+    sf::Sound enemySound;
+    enemySound.setBuffer(enemyBuffer);
+
+    sf::SoundBuffer boostBuffer;
+    boostBuffer.loadFromFile("sounds/boost.wav");
+
+    sf::Sound boostSound;
+    boostSound.setBuffer(boostBuffer);
+
+    sf::SoundBuffer gameBuffer;
+    gameBuffer.loadFromFile("sounds/game.wav");
+
+    sf::Sound gameSound;
+    gameSound.setBuffer(gameBuffer);
+
+    sf::SoundBuffer doorBuffer;
+    doorBuffer.loadFromFile("sounds/door.wav");
+
+    sf::Sound doorSound;
+    doorSound.setBuffer(doorBuffer);
 
     // Map
 
@@ -123,6 +156,7 @@ int main() {
                         sf::FloatRect pointBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
                         if (player.checkItemCollision(pointBounds)) {
                             currentMapItems[y][x] = 0;
+                            coinSound.play();
                             points++;
                         }
                     }
@@ -137,6 +171,7 @@ int main() {
                             player.setPosition(140, 136);
                             currentMapItems = currentMapItemsReseter;
                             currentMap = currentMapReseter;
+                            enemySound.play();
                         }
                     }
 
@@ -146,7 +181,8 @@ int main() {
                         sf::FloatRect boostBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
                         if (player.checkItemCollision(boostBounds)) {
                             currentMapItems[y][x] = 0;
-                            player.setMovementBoost(4.0f);
+                            player.setMovementBoost(2.0f);
+                            boostSound.play();
                         }
                     }
 
@@ -155,6 +191,7 @@ int main() {
                     if (currentMapItems[y][x] == 6) {
                         sf::FloatRect doorBounds(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
                         if (player.checkItemCollision(doorBounds)) {
+                            doorSound.play();
                             currentMapItems[y][x] = 7;
                             currentMap[map.getDoorPosition().y][map.getDoorPosition().x] = 0;
                         }
@@ -172,36 +209,42 @@ int main() {
                     map.setTextures(PATH_2, WALL_2, ENEMY_2);
                     currentLevelName = "Algebra";
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 case (3):
                     changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_3, MAP_3_ITEMS);
                     map.setTextures(PATH_3, WALL_3, ENEMY_3);
                     currentLevelName = "Procesy wytwarzania metali...";
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 case (4):
                     changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_4, MAP_4_ITEMS);
                     map.setTextures(PATH_4, WALL_4, ENEMY_4);
                     currentLevelName = "Chemia";
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 case (5):
                     changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_5, MAP_5_ITEMS);
                     map.setTextures(PATH_5, WALL_5, ENEMY_5);
                     currentLevelName = "Fizyka";
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 case (6):
                     changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_6, MAP_6_ITEMS);
                     map.setTextures(PATH_6, WALL_6, ENEMY_6);
                     currentLevelName = "Podstawy Programowania";
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 case (7):
                     changeMap(currentMap, currentMapReseter, currentMapItems, currentMapItemsReseter, MAP_7, MAP_7_ITEMS);
                     map.setTextures(PATH_7, WALL_7, ENEMY_7);
                     currentLevelName = "Podstawy Informatyki";
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 case(8):
                     endGame = true;
@@ -210,6 +253,7 @@ int main() {
                     currentLevelName = "Analiza Matematyczna";
                     currentLevel = 1;
                     player.setMovementBoost(1.0f);
+                    gameSound.play();
                     break;
                 }
 

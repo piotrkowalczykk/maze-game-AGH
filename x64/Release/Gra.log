@@ -1,7 +1,42 @@
-﻿  main.cpp
+﻿  GameOver.cpp
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,65): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,65): warning C4244:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,65): warning C4244:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,65): warning C4244:             T=float
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,65): warning C4244:         ]
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,46): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,46): warning C4244:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,46): warning C4244:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,46): warning C4244:             T=float
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\GameOver.cpp(45,46): warning C4244:         ]
+  GUI.cpp
+  main.cpp
+  Map.cpp
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267: "argument": konwersja z "size_t" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:             T=unsigned int
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,48): warning C4267:         ]
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267: "argument": konwersja z "size_t" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:             T=unsigned int
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Map.cpp(30,45): warning C4267:         ]
+  Menu.cpp
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:             T=float
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,65): warning C4244:         ]
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:         with
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:         [
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:             T=float
+D:\AGH\Podstawy_Informatyki\CWA\Gra\Gra\Menu.cpp(27,46): warning C4244:         ]
+  Player.cpp
   Trwa generowanie kodu
-  4 of 4 functions (100.0%) were compiled.
-    0 functions were new in current compilation
+  545 of 546 functions (99.8%) were compiled, the rest were copied from previous compilation.
+    542 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   Gra.vcxproj -> D:\AGH\Podstawy_Informatyki\CWA\Gra\x64\Release\Gra.exe
