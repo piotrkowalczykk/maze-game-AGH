@@ -1,4 +1,4 @@
-# 🎉 To do Application
+# 🎉 Engineer Path
 Maze game created in C++ and SFML
 
 ## 🔍 Preview
